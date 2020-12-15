@@ -138,7 +138,7 @@ impl Style {
         Style { bg: None, .. *self }
     }
 
-    /// creates a new Style from the current style with overwriting enabled (designed for chaining)
+    /// sets to overwrite
     /// overwriting is to overwrite previous colors and styles, if on, it will set all unset values back to default,
     /// otherwise the style will only change what it is set to change
     pub fn overwrite(&self) -> Style {
