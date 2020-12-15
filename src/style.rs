@@ -1,6 +1,7 @@
 use std::fmt::Display;
 use std::fmt;
 
+/// Default ansi colors
 #[derive(PartialEq, Clone, Copy)]
 pub enum Color {
     Black,
@@ -25,17 +26,21 @@ pub enum Color {
 }
 
 impl Color {
+    /// Convert color to a style with the foreground set to this color
     pub fn to_style_fg(&self) -> Style {
         Style::new().fg(*self)
     }
+    /// Convert color to a style with the background set to this color
     pub fn to_style_bg(&self) -> Style {
         Style::new().bg(*self)
     }
 
+    /// convert a hexadecimal value to an RGB color value (hex example: 0x000000 for black)
     pub fn hex_to_rgb(hex: u32) -> Color {
         Color::RGB(((hex >> (16u8)) & 0xFF) as u8, ((hex >> (8u8)) & 0xFF) as u8, ((hex) & 0xFF) as u8)
     }
 
+    /// Convert to the ansi value within a string (for output with the ansi char)
     pub fn as_fg(&self) -> String {
         match *self {
             Color::Black  => String::from("30"),
@@ -59,6 +64,7 @@ impl Color {
             Color::Hex(hex) => Color::hex_to_rgb(hex).as_fg()
         }
     }
+    /// Convert to the ansi value within a string (for output with the ansi char
     pub fn as_bg(&self) -> String {
         match *self {
             Color::Black  => String::from("40"),
@@ -90,6 +96,7 @@ impl Display for Color {
     }
 }
 
+/// A way to style output, by setting flags within this struct and then outputting it with ("... {} ...", style)
 #[derive(PartialEq, Clone, Copy)]
 pub struct Style {
     pub fg: Option<Color>,
@@ -106,62 +113,79 @@ pub struct Style {
 }
 
 impl Style {
+    /// Creates a new Style with default values
     pub fn new() -> Style {
         Style::default()
     }
 
+    /// sets the foreground
     pub fn fg(&self, c: Color) -> Style {
         Style { fg: Some(c), .. *self }
     }
 
+    /// clears the foreground
     pub fn clear_fg(&self) -> Style {
         Style { fg: None, .. *self }
     }
 
+    /// sets a new background
     pub fn bg(&self, c: Color) -> Style {
         Style { bg: Some(c), .. *self }
     }
 
+    /// clear the background
     pub fn clear_bg(&self) -> Style {
         Style { bg: None, .. *self }
     }
 
+    /// creates a new Style from the current style with overwriting enabled (designed for chaining)
+    /// overwriting is to overwrite previous colors and styles, if on, it will set all unset values back to default,
+    /// otherwise the style will only change what it is set to change
     pub fn overwrite(&self) -> Style {
         Style { overwrite: true, .. *self }
     }
 
+    /// Set the output to bold
     pub fn bold(&self) -> Style {
         Style { bold: true, .. *self }
     }
 
+    /// Set the output to be dim
     pub fn dim(&self) -> Style {
         Style { dim: true, .. *self }
     }
 
+    /// Set the output to be italic
     pub fn italic(&self) -> Style {
         Style { italic: true, .. *self }
     }
 
+    /// Set the output to be underlined
     pub fn underline(&self) -> Style {
         Style { underline: true, .. *self }
     }
 
+    /// Set the output to blink (untested - can't find a terminal that works)
     pub fn blink(&self) -> Style {
         Style { blink: true, .. *self }
     }
 
+    /// Inverts the current colors (bg and fg) through ansi (does not change fg and bg values)
     pub fn invert(&self) -> Style {
         Style { invert: true, .. *self }
     }
 
+    /// hides the text (it's still there, just hidden.)
     pub fn hide(&self) -> Style {
         Style { hide: true, .. *self }
     }
 
+    /// sets the text to be strike-through
     pub fn strikethrough(&self) -> Style {
         Style { strikethrough: true, .. *self }
     }
 
+    #[doc(hidden)]
     fn gen(&self) -> String {
         let mut s = String::from("\x1b[");
         let mut has_written = false;
@@ -203,6 +227,7 @@ impl Style {
 }
 
 impl Default for Style {
+    /// Get the default values for a Style
     fn default() -> Self {
         Style {
             fg: None,
@@ -221,6 +246,7 @@ impl Default for Style {
 }
 
 impl Display for Style {
+    #[doc(hidden)]
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(f, "{}", self.gen())
     }
