@@ -13,5 +13,5 @@ Cargo.lock
 **/*.rs.bk
 
 # intellij workspace files
-.idea/
+/.idea/
 better_term.iml
