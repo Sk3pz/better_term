@@ -1,4 +1,3 @@
-use std::ops::Add;
 use std::fmt::Display;
 use std::fmt;
 
@@ -194,7 +193,6 @@ impl Style {
 
         if let Some(fg) = self.fg {
             if has_written { s += ";"; }
-            has_written = true;
             s += fg.as_fg().as_str();
         }
 
