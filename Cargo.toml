@@ -4,5 +4,9 @@ version = "0.1.0"
 authors = ["Skepz"]
 edition = "2018"
 description = "A crate for ANSI output in the terminal"
+repository = "https://github.com/Sk3pz/better_term"
+license = "MIT"
+keywords = ["terminal", "ansi", "console"]
+categories = ["command-line-utilities"]
 
 [dependencies]
