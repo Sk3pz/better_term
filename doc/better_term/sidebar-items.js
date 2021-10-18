@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Color","Default ansi colors"]],"struct":[["Style","A way to style output, by setting flags within this struct and then outputting it with (“… {} …”, style)"]]});
