@@ -1,6 +1,6 @@
 [package]
 name = "better_term"
-version = "0.1.1"
+version = "1.0.0"
 authors = ["Skepz"]
 edition = "2018"
 description = "A crate for ANSI output in the terminal"
