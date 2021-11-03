@@ -268,7 +268,46 @@ impl Display for Style {
     }
 }
 
+#[doc(hidden)]
+const RAINBOW: [Color; 6] = [Color::BrightRed, Color::Yellow, Color::BrightYellow, Color::BrightGreen, Color::Cyan, Color::BrightPurple];
+
+/// This function takes a string and makes all the characters rainbow
+///
+/// # Example:
+/// ```
+/// use better_term::rainbowify;
+///
+/// // this will print "Hello, World!" in rainbow colors in most terminals
+/// println!("{}", rainbowify("Hello, World!"));
+/// ```
+pub fn rainbowify<S: Into<String>>(s: S) -> String {
+    let mut new_str = String::new();
+    let chars = s.into().chars().collect::<Vec<char>>();
+    let mut i: u8 = 0;
+    for x in 0..chars.len() {
+        let c = chars.get(x).unwrap();
+        new_str += &format!("{}{}", RAINBOW[i as usize], c);
+        if c >= &(33 as char) && c <= &(126 as char)  {
+            i+=1;
+            if i == 6 { i = 0; }
+        }
+    }
+    new_str
+}
+
 /// this will reset all colors and styles in the console for future output
+///
+/// # Example:
+/// ```
+/// use better_term::{flush_styles, rainbowify};
+///
+/// // this will print in rainbow colors
+/// println!("{}", rainbowify("This is rainbow!"));
+///
+/// // clear all colors and styles from the terminal to ensure the next output is normal
+/// flush_styles();
+/// println!("This is normal!");
+/// ```
 pub fn flush_styles() {
     print!("{}", Style::default());
 }
