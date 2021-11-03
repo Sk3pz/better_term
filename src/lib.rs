@@ -267,3 +267,8 @@ impl Display for Style {
         write!(f, "{}", self.gen())
     }
 }
+
+/// this will reset all colors and styles in the console for future output
+pub fn flush_styles() {
+    print!("{}", Style::default());
+}

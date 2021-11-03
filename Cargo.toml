@@ -1,8 +1,8 @@
 [package]
 name = "better_term"
-version = "1.0.0"
+version = "1.0.1"
 authors = ["Skepz"]
-edition = "2018"
+edition = "2021"
 description = "A crate for ANSI output in the terminal"
 repository = "https://github.com/Sk3pz/better_term"
 license = "MIT"
