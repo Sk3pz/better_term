@@ -29,7 +29,8 @@ pub enum Color {
     BrightWhite,
     Fixed(u8),
     RGB(u8,u8,u8),
-    Hex(u32)
+    Hex(u32),
+    Reset,
 }
 
 impl Color {
@@ -68,7 +69,8 @@ impl Color {
             Color::BrightWhite  => String::from("97"),
             Color::Fixed(u) => String::from(format!("38;5;{}", &u).to_string()),
             Color::RGB(r,g,b) => String::from(format!("38;2;{};{};{}", &r,&g,&b).to_string()),
-            Color::Hex(hex) => Color::hex_to_rgb(hex).as_fg()
+            Color::Hex(hex) => Color::hex_to_rgb(hex).as_fg(),
+            Color::Reset => String::from("37"),
         }
     }
     /// Convert to the ansi value within a string (for output with the ansi char
@@ -92,7 +94,8 @@ impl Color {
             Color::BrightWhite  => String::from("107"),
             Color::Fixed(u) => String::from(format!("48;5;{}", &u).to_string()),
             Color::RGB(r,g,b) => String::from(format!("48;2;{};{};{}", &r,&g,&b).to_string()),
-            Color::Hex(hex) => Color::hex_to_rgb(hex).as_bg()
+            Color::Hex(hex) => Color::hex_to_rgb(hex).as_bg(),
+            Color::Reset => String::from("40"),
         }
     }
 }
