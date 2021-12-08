@@ -30,7 +30,7 @@ pub enum Color {
     Fixed(u8),
     RGB(u8,u8,u8),
     Hex(u32),
-    Reset,
+    Default,
 }
 
 impl Color {
@@ -70,7 +70,7 @@ impl Color {
             Color::Fixed(u) => String::from(format!("38;5;{}", &u).to_string()),
             Color::RGB(r,g,b) => String::from(format!("38;2;{};{};{}", &r,&g,&b).to_string()),
             Color::Hex(hex) => Color::hex_to_rgb(hex).as_fg(),
-            Color::Reset => String::from("37"),
+            Color::Default => String::from("37"),
         }
     }
     /// Convert to the ansi value within a string (for output with the ansi char
@@ -95,7 +95,7 @@ impl Color {
             Color::Fixed(u) => String::from(format!("48;5;{}", &u).to_string()),
             Color::RGB(r,g,b) => String::from(format!("48;2;{};{};{}", &r,&g,&b).to_string()),
             Color::Hex(hex) => Color::hex_to_rgb(hex).as_bg(),
-            Color::Reset => String::from("40"),
+            Color::Default => String::from("40"),
         }
     }
 }
@@ -129,13 +129,18 @@ pub struct Style {
     blink: bool,
     invert: bool,
     hide: bool,
-    strikethrough: bool
+    strikethrough: bool,
 }
 
 impl Style {
     /// Creates a new Style with default values
     pub fn new() -> Style {
         Style::default()
+    }
+
+    /// Resets all styles and makes a new style
+    pub fn reset() -> Style {
+        Style::default().overwrite()
     }
 
     /// sets the foreground
@@ -247,6 +252,7 @@ impl Style {
 
 impl Default for Style {
     /// Get the default values for a Style
+    /// This will not overwrite anything other than what is set by previous styles
     fn default() -> Self {
         Style {
             fg: None,
