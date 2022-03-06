@@ -35,8 +35,8 @@ pub(crate) fn _yn_prompt(p: String) -> bool {
 #[macro_export]
 /// Returns a string from stdin with the prompt given
 macro_rules! read_input {
-    () =>  { crate::input::_read_input(format!("> "))};
-    ($($arg:tt)*) =>  { crate::input::_read_input(format!("{}", format_args!($($arg)*)))};
+    () =>  { crate::_read_input(format!("> "))};
+    ($($arg:tt)*) =>  { crate::_read_input(format!("{}", format_args!($($arg)*)))};
 }
 
 #[cfg(feature = "input")]
@@ -45,8 +45,8 @@ macro_rules! read_input {
 /// Returns false if the user types 'n', 'N', or "no" to the prompt
 /// repeats prompt until user enters a valid input
 macro_rules! yesno_prompt {
-    () =>  { crate::input::_yn_prompt(format!("> "))};
-    ($($arg:tt)*) =>  { crate::input::_yn_prompt(format!("{}", format_args!($($arg)*)))};
+    () =>  { crate::_yn_prompt(format!("> "))};
+    ($($arg:tt)*) =>  { crate::_yn_prompt(format!("{}", format_args!($($arg)*)))};
 }
 
 #[cfg(test)]
