@@ -1,6 +1,40 @@
 #[cfg(feature = "input")]
 pub mod input;
 
+#[cfg(feature = "input")]
+#[macro_export]
+/// Returns a string from stdin with the prompt given
+macro_rules! read_input {
+    () =>  { crate::input::_read_input(format!("> "))};
+    ($($arg:tt)*) =>  { crate::input::_read_input(format!("{}", format_args!($($arg)*)))};
+}
+
+#[cfg(feature = "input")]
+#[macro_export]
+/// Returns true if the user types 'y', 'Y', or "yes" to the prompt
+/// Returns false if the user types 'n', 'N', or "no" to the prompt
+/// repeats prompt until user enters a valid input
+macro_rules! yesno_prompt {
+    () =>  { crate::input::_yn_prompt(format!("> "))};
+    ($($arg:tt)*) =>  { crate::input::_yn_prompt(format!("{}", format_args!($($arg)*)))};
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::{Color, flush_styles, read_input, Style, yesno_prompt};
+
+    #[test]
+    fn test1() {
+        let input = read_input!();
+        println!("{}", input);
+
+        let input2 = yesno_prompt!("Is this a question? ");
+        println!("You were {}{}!", if input2 { format!("{}correct", Color::Green) }
+        else { format!("{}wrong", Color::Red) }, Style::reset());
+        flush_styles();
+    }
+}
+
 use std::fmt::Display;
 use std::fmt;
 
