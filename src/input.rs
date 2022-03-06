@@ -31,7 +31,7 @@ pub(crate) fn _read_input(prompt: String) -> String {
     buffer.replace("\n", "").replace("\r", "")
 }
 
-#[cfg(feature = "io")]
+#[cfg(feature = "input")]
 #[macro_export]
 /// Returns a string from stdin with the prompt given
 macro_rules! read_input {
@@ -53,7 +53,7 @@ pub(crate) fn _yn_prompt(p: String) -> bool {
     }
 }
 
-#[cfg(feature = "io")]
+#[cfg(feature = "input")]
 #[macro_export]
 /// Returns true if the user types 'y', 'Y', or "yes" to the prompt
 /// Returns false if the user types 'n', 'N', or "no" to the prompt
