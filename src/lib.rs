@@ -1,3 +1,6 @@
+#[cfg(feature = "input")]
+pub mod input;
+
 use std::fmt::Display;
 use std::fmt;
 

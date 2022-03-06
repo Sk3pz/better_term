@@ -1,12 +1,16 @@
 [package]
 name = "better_term"
-version = "1.0.4"
+version = "1.2.0"
 authors = ["Skepz"]
 edition = "2021"
-description = "A crate for ANSI output in the terminal"
+description = "A crate that makes using the terminal easier."
 repository = "https://github.com/Sk3pz/better_term"
 license = "MIT"
-keywords = ["terminal", "ansi", "console"]
+keywords = ["terminal", "ansi", "console", "io"]
 categories = ["command-line-utilities"]
 
 [dependencies]
+
+[features]
+default = ["input"]
+input = []
