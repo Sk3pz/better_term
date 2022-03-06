@@ -33,3 +33,16 @@ println!("{}", rainbowify("This is rainbow!!!!!"));
 // clear all colors and styles to reset to default
 flush_styles();
 ```
+
+### Input
+```rust
+use better_term::{read_input, yesno_prompt};
+
+// gets a string from stdin, with a prompt
+let input: String = read_input!("Please enter a value: ");
+
+// gets true if the user enters a value for yes, and false if the user enters no
+let prompt: bool = yesno_prompt!("Are you sure you want to enter {}?", input);
+
+// ...
+```
