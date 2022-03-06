@@ -1,4 +1,4 @@
-use std::input::{stdin, stdout, Write};
+use std::io::{stdin, stdout, Write};
 use crate::{Color, flush_styles};
 
 #[cfg(test)]
