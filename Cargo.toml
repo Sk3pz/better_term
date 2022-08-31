@@ -1,10 +1,11 @@
 [package]
 name = "better_term"
-version = "1.3.4"
+version = "1.3.5"
 authors = ["Skepz"]
 edition = "2021"
 description = "A crate that makes using the terminal easier."
 repository = "https://github.com/Sk3pz/better_term"
+documentation = "https://docs.rs/better_term/latest/better_term/index.html"
 license = "MIT"
 keywords = ["terminal", "ansi", "console", "io"]
 categories = ["command-line-utilities"]
