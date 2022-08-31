@@ -373,6 +373,7 @@ const RAINBOW: [Color; 6] = [Color::BrightRed, Color::Yellow, Color::BrightYello
 /// ```
 #[cfg(feature = "output")]
 pub fn rainbowify<S: Into<String>>(s: S) -> String {
+    // todo(eric): rewrite to have a "separation" value so it generates more consistent gradients for longer strings
     let mut new_str = String::new();
     let chars = s.into().chars().collect::<Vec<char>>();
     let mut i: u8 = 0;
