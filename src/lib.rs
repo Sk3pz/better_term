@@ -65,7 +65,9 @@ mod tests {
     }
 }
 
+#[cfg(feature = "output")]
 use std::fmt::Display;
+#[cfg(feature = "output")]
 use std::fmt;
 
 /// Default ansi colors
@@ -76,6 +78,7 @@ use std::fmt;
 /// // prints Hello, world! in green and red
 /// println!("{}Hello, {}world!", Color::BrightGreen, Color::BrightRed);
 /// ```
+#[cfg(feature = "output")]
 #[derive(PartialEq, Clone, Copy)]
 pub enum Color {
     Black,
@@ -184,6 +187,7 @@ impl Display for Color {
 ///
 /// println!("{}Hello, world!", style);
 /// ```
+#[cfg(feature = "output")]
 #[derive(PartialEq, Clone, Copy)]
 pub struct Style {
     fg: Option<Color>,
@@ -356,6 +360,7 @@ const RAINBOW: [Color; 6] = [Color::BrightRed, Color::Yellow, Color::BrightYello
 /// // this will print "Hello, World!" in rainbow colors in most terminals
 /// println!("{}", rainbowify("Hello, World!"));
 /// ```
+#[cfg(feature = "output")]
 pub fn rainbowify<S: Into<String>>(s: S) -> String {
     let mut new_str = String::new();
     let chars = s.into().chars().collect::<Vec<char>>();
