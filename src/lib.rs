@@ -2,6 +2,7 @@
 use std::io::{stdin, stdout, Write};
 
 #[cfg(feature = "input")]
+#[doc(hidden)]
 pub fn _read_input(prompt: String) -> String {
     print!("{}", prompt);
     let r = stdout().flush();
@@ -17,6 +18,7 @@ pub fn _read_input(prompt: String) -> String {
 }
 
 #[cfg(feature = "input")]
+#[doc(hidden)]
 pub fn _yn_prompt(p: String) -> bool {
     loop {
         let input = read_input!("{} (Y or N): ", p);
