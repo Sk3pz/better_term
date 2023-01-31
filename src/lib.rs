@@ -3,7 +3,7 @@ use std::io::{stdin, stdout, Write};
 
 #[cfg(feature = "input")]
 #[doc(hidden)]
-fn _read_input(prompt: String) -> String {
+pub fn _read_input(prompt: String) -> String {
     print!("{}", prompt);
     let r = stdout().flush();
     if r.is_err() {
@@ -19,7 +19,7 @@ fn _read_input(prompt: String) -> String {
 
 #[cfg(feature = "input")]
 #[doc(hidden)]
-fn _yn_prompt(p: String) -> bool {
+pub fn _yn_prompt(p: String) -> bool {
     loop {
         let input = read_input!("{} (Y or N): ", p);
         match input.to_ascii_lowercase().as_str() {
