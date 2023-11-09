@@ -21,9 +21,9 @@ pub fn _read_input(prompt: String) -> String {
 #[doc(hidden)]
 pub fn _yn_prompt(p: String) -> bool {
     loop {
-        let input = read_input!("{} (Y or N): ", p);
+        let input = _read_input(format!("{} (Y/n): ", p));
         match input.to_ascii_lowercase().as_str() {
-            "y" | "yes" => return true,
+            "y" | "yes" | "" => return true,
             "n" | "no" => return false,
             _ => {
                 println!("{}Warning: The input can only be Y or N!", Color::Yellow);
