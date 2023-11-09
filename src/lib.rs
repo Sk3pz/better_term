@@ -54,7 +54,7 @@ macro_rules! read_input {
 /// Works the same way as read_input!()
 /// Returns true if the user types 'y', 'Y', or "yes" to the prompt
 /// Returns false if the user types 'n', 'N', or "no" to the prompt
-/// repeats prompt until user enters a valid input
+/// defaults to yes if the user presses enter
 macro_rules! yesno_prompt {
     () =>  { $crate::_yn_prompt(format!("> "))};
     ($($arg:tt)*) =>  { $crate::_yn_prompt(format!("{}", format_args!($($arg)*)))};
