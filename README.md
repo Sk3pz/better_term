@@ -25,13 +25,14 @@ println!("{}Hello, {}world!", Color::BrightGreen, Color::BrightRed);
 ### Flushing Styles and Colors
 It may be useful to reset all the changes you have made, and go back to the default output style. the `flush_styles()` function is meant for this.
 ```rust
-use better_term::{flush_styles, rainbowify};
+use better_term::{flush_styles};
 
 // prints the text in rainbow colors
-println!("{}", rainbowify("This is rainbow!!!!!"));
+println!("{}This is red!", Color::Red);
 
 // clear all colors and styles to reset to default
 flush_styles();
+println!("This is normal!");
 ```
 
 ### Input

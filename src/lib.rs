@@ -21,7 +21,7 @@ pub fn _read_input(prompt: String) -> String {
 #[doc(hidden)]
 pub fn _yn_prompt(p: String) -> bool {
     loop {
-        let input = _read_input(format!("{} (Y/n): ", p));
+        let input = _read_input(format!("{} [Y/n]: ", p));
         match input.to_ascii_lowercase().as_str() {
             "y" | "yes" | "" => return true,
             "n" | "no" => return false,
@@ -56,7 +56,7 @@ macro_rules! read_input {
 /// Returns false if the user types 'n', 'N', or "no" to the prompt
 /// defaults to yes if the user presses enter
 macro_rules! yesno_prompt {
-    () =>  { $crate::_yn_prompt(format!("> "))};
+    () =>  { $crate::_yn_prompt("Yes or no")};
     ($($arg:tt)*) =>  { $crate::_yn_prompt(format!("{}", format_args!($($arg)*)))};
 }
 
@@ -359,43 +359,14 @@ impl Display for Style {
     }
 }
 
-#[doc(hidden)]
-const RAINBOW: [Color; 6] = [Color::BrightRed, Color::Yellow, Color::BrightYellow, Color::BrightGreen, Color::Cyan, Color::BrightPurple];
-
-/// This function takes a string and makes all the characters rainbow
-///
-/// # Example:
-/// ```
-/// use better_term::rainbowify;
-///
-/// // this will print "Hello, World!" in rainbow colors in most terminals
-/// println!("{}", rainbowify("Hello, World!"));
-/// ```
-#[cfg(feature = "output")]
-pub fn rainbowify<S: Into<String>>(s: S) -> String {
-    // todo(eric): rewrite to have a "separation" value so it generates more consistent gradients for longer strings
-    let mut new_str = String::new();
-    let chars = s.into().chars().collect::<Vec<char>>();
-    let mut i: u8 = 0;
-    for x in 0..chars.len() {
-        let c = chars.get(x).unwrap();
-        new_str += &format!("{}{}", RAINBOW[i as usize], c);
-        if c >= &(33 as char) && c <= &(126 as char)  {
-            i+=1;
-            if i == 6 { i = 0; }
-        }
-    }
-    new_str
-}
-
 /// this will reset all colors and styles in the console for future output
 ///
 /// # Example:
 /// ```
-/// use better_term::{flush_styles, rainbowify};
+/// use better_term::{Color, flush_styles};
 ///
 /// // this will print in rainbow colors
-/// println!("{}", rainbowify("This is rainbow!"));
+/// println!("{}This is red!", Color::Red);
 ///
 /// // clear all colors and styles from the terminal to ensure the next output is normal
 /// flush_styles();
