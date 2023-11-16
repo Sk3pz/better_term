@@ -40,12 +40,12 @@ pub fn _yn_prompt(p: String) -> bool {
 /// ```
 /// use better_term::read_input;
 ///
-/// // by default read_input() will prompt with "> "
+/// // by default read_input() will prompt with nothing
 /// let input = read_input!();
 /// // specify a custom prompt with the same formatting as format!()
 /// let input2 = read_input!("Enter a second value: ");
 macro_rules! read_input {
-    () =>  { $crate::_read_input(format!("> "))};
+    () =>  { $crate::_read_input(format!(""))};
     ($($arg:tt)*) =>  { $crate::_read_input(format!("{}", format_args!($($arg)*)))};
 }
 
@@ -56,7 +56,7 @@ macro_rules! read_input {
 /// Returns false if the user types 'n', 'N', or "no" to the prompt
 /// defaults to yes if the user presses enter
 macro_rules! yesno_prompt {
-    () =>  { $crate::_yn_prompt("Yes or no")};
+    () =>  { $crate::_yn_prompt("")};
     ($($arg:tt)*) =>  { $crate::_yn_prompt(format!("{}", format_args!($($arg)*)))};
 }
 
