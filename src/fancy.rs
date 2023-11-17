@@ -1,10 +1,9 @@
-use crate::Color;
+
 
 /// Generates a gradient from start to end with size steps
 /// # Example
 /// ```
 /// use better_term::fancy::gradient;
-/// use better_term::Color;
 ///
 /// // prints a gradient from red to green with 10 steps
 /// let gradient = gradient((255, 0, 0), (0, 255, 0), 10);

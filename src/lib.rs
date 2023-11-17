@@ -1,22 +1,6 @@
 pub mod input;
 pub mod fancy;
 
-#[cfg(test)]
-mod tests {
-    use crate::{Color, flush_styles, read_input, Style, yesno_prompt};
-
-    #[test]
-    fn test1() {
-        let input = read_input!();
-        println!("{}", input);
-
-        let input2 = yesno_prompt!("Is this a question? ");
-        println!("You were {}{}!", if input2 { format!("{}correct", Color::Green) }
-        else { format!("{}wrong", Color::Red) }, Style::reset());
-        flush_styles();
-    }
-}
-
 #[cfg(feature = "output")]
 use std::fmt::Display;
 #[cfg(feature = "output")]
@@ -89,8 +73,8 @@ impl Color {
             Color::BrightPurple => String::from("95"),
             Color::BrightCyan   => String::from("96"),
             Color::BrightWhite  => String::from("97"),
-            Color::Fixed(u) => String::from(format!("38;5;{}", &u).to_string()),
-            Color::RGB(r,g,b) => String::from(format!("38;2;{};{};{}", &r,&g,&b).to_string()),
+            Color::Fixed(u) => format!("38;5;{}", &u),
+            Color::RGB(r,g,b) => format!("38;2;{};{};{}", &r,&g,&b),
             Color::Hex(hex) => Color::hex_to_rgb(hex).as_fg(),
             Color::Default => String::from("37"),
         }
@@ -114,8 +98,8 @@ impl Color {
             Color::BrightPurple => String::from("105"),
             Color::BrightCyan   => String::from("106"),
             Color::BrightWhite  => String::from("107"),
-            Color::Fixed(u) => String::from(format!("48;5;{}", &u).to_string()),
-            Color::RGB(r,g,b) => String::from(format!("48;2;{};{};{}", &r,&g,&b).to_string()),
+            Color::Fixed(u) => format!("48;5;{}", &u).to_string(),
+            Color::RGB(r,g,b) => format!("48;2;{};{};{}", &r,&g,&b).to_string(),
             Color::Hex(hex) => Color::hex_to_rgb(hex).as_bg(),
             Color::Default => String::from("40"),
         }

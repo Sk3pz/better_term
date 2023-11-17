@@ -1,6 +1,5 @@
 #[cfg(feature = "input")]
 use std::io::{stdin, stdout, Write};
-use crate::{Color, flush_styles};
 
 #[cfg(feature = "input")]
 #[doc(hidden)]
@@ -8,26 +7,24 @@ pub fn _read_input(prompt: String) -> String {
     print!("{}", prompt);
     let r = stdout().flush();
     if r.is_err() {
-        panic!("Error flusing output: {}", r.unwrap_err());
+        panic!("Error flushing output: {}", r.unwrap_err());
     }
     let mut buffer = String::new();
     let r2 = stdin().read_line(&mut buffer);
     if r2.is_err() {
         panic!("Error in reading input: {}", r.unwrap_err());
     }
-    buffer.replace("\n", "").replace("\r", "")
+    buffer.replace(['\n', '\r'], "")
 }
 
 #[cfg(feature = "input")]
 #[doc(hidden)]
 pub fn _yn_prompt(p: String) -> bool {
-    loop {
-        let input = _read_input(format!("{} [Y/n]: ", p));
-        match input.to_ascii_lowercase().as_str() {
-            // "y" | "yes" | "" => return true,
-            "n" | "no" => return false,
-            _ => return true,
-        }
+    let input = _read_input(format!("{} [Y/n]: ", p));
+    return match input.to_ascii_lowercase().as_str() {
+        // "y" | "yes" | "" => return true,
+        "n" | "no" => false,
+        _ => true,
     }
 }
 
