@@ -10,7 +10,7 @@
 /// }
 /// ```
 #[cfg(feature = "fancy")]
-pub fn gradient(start: (u8, u8, u8), end: (u8, u8, u8), size: u8) -> Vec<crate::Color> {
+pub fn gradient(start: (u8, u8, u8), end: (u8, u8, u8), size: usize) -> Vec<crate::Color> {
     // Calculate the step size for each color channel
     let step_r = (end.0 as i16 - start.0 as i16) as f64 / size as f64;
     let step_g = (end.1 as i16 - start.1 as i16) as f64 / size as f64;
