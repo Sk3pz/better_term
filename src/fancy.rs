@@ -1,4 +1,4 @@
-
+use crate::Color;
 
 /// Generates a gradient from start to end with size steps
 /// # Example
