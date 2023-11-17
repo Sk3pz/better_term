@@ -1,4 +1,6 @@
 pub mod input;
+
+#[cfg(feature = "fancy")]
 pub mod fancy;
 
 #[cfg(feature = "output")]

@@ -9,7 +9,6 @@
 ///    println!("{}Hello, world!", color);
 /// }
 /// ```
-#[cfg(feature = "fancy")]
 pub fn gradient(start: (u8, u8, u8), end: (u8, u8, u8), size: usize) -> Vec<crate::Color> {
     // Calculate the step size for each color channel
     let step_r = (end.0 as i16 - start.0 as i16) as f64 / size as f64;
@@ -26,4 +25,22 @@ pub fn gradient(start: (u8, u8, u8), end: (u8, u8, u8), size: usize) -> Vec<crat
     }
 
     gradient
+}
+
+/// Prints text with a gradient, accounting for multiple lines
+pub fn print_gradient<S: Into<String>>(text: S, gradient_start: (u8, u8, u8), gradient_end: (u8, u8, u8)) {
+    let text = text.into();
+    // handle multiline as well
+    let split = text.split('\n').collect::<Vec<&str>>();
+    let length = split.iter().map(|s| s.len()).max().unwrap();
+
+    let gradient = gradient(gradient_start, gradient_end, length);
+
+    for (i, line) in text.lines().enumerate() {
+        for (j, c) in line.chars().enumerate() {
+            let color_index = (i + j) % gradient.len();
+            print!("{}{}", gradient[color_index], c);
+        }
+        println!();
+    }
 }
