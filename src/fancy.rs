@@ -1,5 +1,3 @@
-use crate::Color;
-
 /// Generates a gradient from start to end with size steps
 /// # Example
 /// ```
@@ -12,7 +10,7 @@ use crate::Color;
 /// }
 /// ```
 #[cfg(feature = "fancy")]
-pub fn gradient(start: (u8, u8, u8), end: (u8, u8, u8), size: u8) -> Vec<Color> {
+pub fn gradient(start: (u8, u8, u8), end: (u8, u8, u8), size: u8) -> Vec<crate::Color> {
     // Calculate the step size for each color channel
     let step_r = (end.0 as i16 - start.0 as i16) as f64 / size as f64;
     let step_g = (end.1 as i16 - start.1 as i16) as f64 / size as f64;
@@ -24,7 +22,7 @@ pub fn gradient(start: (u8, u8, u8), end: (u8, u8, u8), size: u8) -> Vec<Color> 
         let r = (start.0 as f64 + i as f64 * step_r).round() as u8;
         let g = (start.1 as f64 + i as f64 * step_g).round() as u8;
         let b = (start.2 as f64 + i as f64 * step_b).round() as u8;
-        gradient.push(Color::RGB(r, g, b));
+        gradient.push(crate::Color::RGB(r, g, b));
     }
 
     gradient
