@@ -47,3 +47,17 @@ let prompt: bool = yesno_prompt!("Are you sure you want to enter {}?", input);
 
 // ...
 ```
+
+### Fancy
+The `fancy` feature is not enabled by default. It currently adds the gradient() function which will return a gradient from a start color to an end color with a given length.  
+More tools are planned for this feature in the future.
+```rust
+use better_term::fancy::gradient;
+use better_term::Color;
+
+// prints a gradient from red to green with 10 steps
+let gradient = gradient((255, 0, 0), (0, 255, 0), 10);
+for color in gradient {
+    println!("{}Hello, world!", color);
+}
+```

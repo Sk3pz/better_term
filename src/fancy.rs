@@ -1,0 +1,32 @@
+use crate::Color;
+
+/// Generates a gradient from start to end with size steps
+/// # Example
+/// ```
+/// use better_term::fancy::gradient;
+/// use better_term::Color;
+///
+/// // prints a gradient from red to green with 10 steps
+/// let gradient = gradient((255, 0, 0), (0, 255, 0), 10);
+/// for color in gradient {
+///    println!("{}Hello, world!", color);
+/// }
+/// ```
+#[cfg(feature = "fancy")]
+pub fn gradient(start: (u8, u8, u8), end: (u8, u8, u8), size: u8) -> Vec<Color> {
+    // Calculate the step size for each color channel
+    let step_r = (end.0 as i16 - start.0 as i16) as f64 / size as f64;
+    let step_g = (end.1 as i16 - start.1 as i16) as f64 / size as f64;
+    let step_b = (end.2 as i16 - start.2 as i16) as f64 / size as f64;
+
+    // Generate the gradient
+    let mut gradient = Vec::new();
+    for i in 0..size {
+        let r = (start.0 as f64 + i as f64 * step_r).round() as u8;
+        let g = (start.1 as f64 + i as f64 * step_g).round() as u8;
+        let b = (start.2 as f64 + i as f64 * step_b).round() as u8;
+        gradient.push(Color::RGB(r, g, b));
+    }
+
+    gradient
+}
