@@ -1,6 +1,6 @@
 [package]
 name = "better_term"
-version = "1.4.6"
+version = "1.4.61"
 authors = ["Eric <skepz.dev@gmail.com>"]
 edition = "2021"
 description = "A crate that makes using the terminal easier."
