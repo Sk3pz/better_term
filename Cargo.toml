@@ -1,7 +1,7 @@
 [package]
 name = "better_term"
-version = "1.4.5"
-authors = ["Skepz"]
+version = "1.4.6"
+authors = ["Eric <skepz.dev@gmail.com>"]
 edition = "2021"
 description = "A crate that makes using the terminal easier."
 repository = "https://github.com/Sk3pz/better_term"

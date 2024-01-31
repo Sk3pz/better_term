@@ -24,7 +24,7 @@ pub fn _yn_prompt(p: String) -> bool {
     return match input.to_ascii_lowercase().as_str() {
         // "y" | "yes" | "" => return true,
         "n" | "no" => false,
-        _ => true,
+        _ => true, // default yes
     }
 }
 
@@ -40,8 +40,8 @@ pub fn _yn_prompt(p: String) -> bool {
 /// // specify a custom prompt with the same formatting as format!()
 /// let input2 = read_input!("Enter a second value: ");
 macro_rules! read_input {
-    () =>  { $crate::_read_input(format!(""))};
-    ($($arg:tt)*) =>  { $crate::_read_input(format!("{}", format_args!($($arg)*)))};
+    () =>  { _read_input(format!(""))};
+    ($($arg:tt)*) =>  { _read_input(format!("{}", format_args!($($arg)*)))};
 }
 
 #[cfg(feature = "input")]
@@ -51,6 +51,6 @@ macro_rules! read_input {
 /// Returns false if the user types 'n', 'N', or "no" to the prompt
 /// defaults to yes if the user presses enter
 macro_rules! yesno_prompt {
-    () =>  { $crate::_yn_prompt("")};
-    ($($arg:tt)*) =>  { $crate::_yn_prompt(format!("{}", format_args!($($arg)*)))};
+    () =>  { _yn_prompt("")};
+    ($($arg:tt)*) =>  { _yn_prompt(format!("{}", format_args!($($arg)*)))};
 }
